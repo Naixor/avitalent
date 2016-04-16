@@ -1,7 +1,7 @@
 {
-  "name": "avitalent",
+  "name": "avitalent editor",
   "version": "1.0.0",
-  "description": "avitalent.net",
+  "description": "avitalent.net editor",
   "main": "index.js",
   "scripts": {
     "dev": "node webpack-dev-server.js --TARGET=DEV",
