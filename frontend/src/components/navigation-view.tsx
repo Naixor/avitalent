@@ -14,25 +14,37 @@ declare namespace window {
 
 namespace NavigationView {
     class Navigator {
-        private hashTable: Object
-        private views: Element[]
+        private locatorTable: Object
+        private linkerTable: Object
         constructor() {
-            this.hashTable = {};
-            this.views = [];
+            this.locatorTable = {};
+            this.linkerTable = {};
         }
         linkLocator(link: string, locator: Element) {
             if (link) {
-                this.hashTable[link] = locator;
-                this.views.push(locator);
+                this.locatorTable[link] = locator;
             }
         }
         unlinkLocator(link: string) {
-            if (this.hashTable[link]) {
-                delete this.hashTable[link];
+            if (this.locatorTable[link]) {
+                delete this.locatorTable[link];
             } 
         }
         getLocator(link: string) {
-            return this.hashTable[link] || null;
+            return this.locatorTable[link] || null;
+        }
+        linkLinker(link: string, linker: Element) {
+            if (link) {
+                this.linkerTable[link] = linker;
+            }
+        }
+        unlinkLinker(link: string) {
+            if (this.linkerTable[link]) {
+                delete this.linkerTable[link];
+            }
+        }
+        getLinker(link: string) {
+            return this.linkerTable[link] || null;
         }
     }
     
@@ -140,7 +152,7 @@ namespace NavigationView {
     }
     
     const _navigator = new Navigator();
-    const eventEmitter = new EventEmitter();
+    export const eventEmitter = new EventEmitter();
     const _animteScroll = new AnimateScroll();
     
     interface ViewPropsInf {
@@ -202,10 +214,10 @@ namespace NavigationView {
             super(props);
         }
         componentDidMount() {
-
+            _navigator.linkLinker(this.props.locator, ReactDOM.findDOMNode(this));
         }
         componentWillUnmount() {
-
+            _navigator.unlinkLinker(this.props.locator);
         }
         linkLocator(e) {
             this.props.onClick(e);
@@ -228,7 +240,7 @@ namespace NavigationView {
     }
     
     interface ContainerStateInf {
-        
+
     }
     
     export class Container extends React.Component<ContainerPropsInf, ContainerStateInf> {
@@ -238,17 +250,41 @@ namespace NavigationView {
                 position: 'absolute',
                 width: '100%',
                 height: '100%',
+                fontSize: '0',
                 overflowY: 'scroll'
             },
             className: ''
         }
         private element: Element
+        private children: any[]
+        private preActiveChildViewIdx = 0;
         constructor(props) {
             super(props);
+            this.children = [].concat.apply([], this.props.children).filter((child) => {
+                return child.type === View;
+            }).map((child: View, key) => {
+                return <li key={key} style={{
+                    display: 'inline-block',
+                    width: '100%',
+                    height: '100%'
+                }}>{child}</li>
+            });
         }
         componentDidMount() {
             this.element = ReactDOM.findDOMNode(this);
-            eventEmitter.on('scrollTo', this.scrollToHandler.bind(this));            
+            this.element.addEventListener('scroll', this.watchViewScroll.bind(this));
+            eventEmitter.on('scrollTo', this.scrollToHandler.bind(this));
+        }
+        componentWillUnMount() {
+            eventEmitter.off('scrollTo', this.scrollToHandler);
+            this.element.removeEventListener('scroll', this.watchViewScroll);
+        }
+        watchViewScroll(e: Event) {
+            const activeChildViewIdx = Math.floor(this.element.scrollTop / this.element.getBoundingClientRect().height);
+            if (this.preActiveChildViewIdx !== activeChildViewIdx) {
+                eventEmitter.emit('backScrollTo', activeChildViewIdx);
+                this.preActiveChildViewIdx = activeChildViewIdx;
+            }
         }
         scrollToHandler(childViewElement: Element) {
             _animteScroll.scrollTo(this.element, childViewElement.getBoundingClientRect().top, 500, (x) => {
@@ -256,22 +292,9 @@ namespace NavigationView {
             });
         }
         render() {
-            let children = [].concat.apply([], this.props.children);
-            
             return (
                 <ul style={assign(Container.defaultProps.style, this.props.style)} className={this.props.className}>
-                    {
-                        children.map((child, key) => {
-                            if (child.type === View) {
-                                return <li key={key} style={{
-                                    position: 'relative',
-                                    width: '100%',
-                                    height: '100%'
-                                }}>{child}</li>    
-                            }
-                            return child;
-                        })
-                    }
+                    {this.children}
                 </ul>
             )
         }
@@ -279,6 +302,7 @@ namespace NavigationView {
 }
 
 export default NavigationView;
+export import NavigationViewEvent = NavigationView.eventEmitter;
 export import View = NavigationView.View;
 export import Link = NavigationView.Link;
 export import Container = NavigationView.Container;

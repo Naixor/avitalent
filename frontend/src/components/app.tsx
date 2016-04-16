@@ -11,7 +11,7 @@ import { Layout } from './layout';
 import { ListItem, MOCK } from '../modules/datastructures';
 import { get } from '../modules/utils/ajax';
 
-import { assign } from 'lodash';
+import { assign, merge, extend } from 'lodash';
 
 import { View, Container } from './navigation-view';
 import { CommentPaginate } from './comment-paginate';
@@ -55,12 +55,14 @@ class App extends React.Component<AppProps, AppState> {
         position: 'fixed',
         zIndex: 1000
     }
+    private bigModeLeftStyle: any;
     refs: {
         [key: string]: Element
         left: HTMLDivElement
     }
     constructor(props) {
         super(props);
+        this.bigModeLeftStyle = {flex: 1,minWidth: '240px',maxWidth: '340px',backgroundColor: Styles.Colors.darkBlack};
         this.state = {
             smallMode: false,
             leftOpen: false,
@@ -92,22 +94,23 @@ class App extends React.Component<AppProps, AppState> {
         let _state: any = assign({}, this.state, {leftOpen: open});
         this.setState(_state);
     }
-    componentDidMount() {
-        // ScrollAnim.scrollScreen.init();
+    getLeftStyle() {
+        return !this.state.smallMode ? {flex: 1,minWidth: '240px',maxWidth: '340px',backgroundColor: Styles.Colors.darkBlack}
+                                    : {flex: 1, minWidth: '0px',maxWidth: '0px', backgroundColor: Styles.Colors.darkBlack};
     }
     render() {
-        let left;
         if (this.state.smallMode) {
-            left = <AviLeftNav  open={this.state.leftOpen} onRequestChange={open => this.requestChange(open)} items={this.state.leftItems}/>;
+            this.bigModeLeftStyle.maxWidth = '0px';
+            this.bigModeLeftStyle.minWidth = '0px';    
         } else {
-            left = <AviLeft
-                        style={layoutJson.Box.children[0].style}
-                        items={this.state.leftItems}
-                        card={layoutJson.Box.children[0].card}/>;
+            this.bigModeLeftStyle.maxWidth = '240px';
+            this.bigModeLeftStyle.minWidth = '340px';
         }
+
         return (
             <Box minWidth="700" onModeChange={this.handleModeChange.bind(this)}>
-                {left}
+                <AviLeft style={this.bigModeLeftStyle} items={this.state.leftItems} card={layoutJson.Box.children[0].card}/>
+                <AviLeftNav open={this.state.leftOpen} onRequestChange={open => this.requestChange(open)} items={this.state.leftItems}/>
                 <div style={RightStyle}>
                     <AppBar
                         style={this.appBarStyle}
@@ -145,7 +148,18 @@ class App extends React.Component<AppProps, AppState> {
                                     "backgroundPosition": "50% 50%",
                                     "backgroundRepeat": "no-repeat"
                                 }}>
-   
+                                <div className="child-view-container">
+                                    <Title style={{
+                                        color: 'white',
+                                        textAlign: 'left'
+                                    }} content={"2016年祥鹏航空大学生公费飞行学员校园招聘"}/>
+                                    <Title style={{
+                                        color: 'white',
+                                        textAlign: 'left',
+                                        fontSize: '0.5rem'
+                                    }} content={"请填写以下报名信息"}/>
+                                    
+                                </div>
                             </View>
                             <View className="child-view"
                                 locator="/polit/job/news">

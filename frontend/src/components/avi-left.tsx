@@ -3,12 +3,13 @@
 import * as React from 'react';
 import { MenuItem, Card, CardHeader, CardTitle, CardMedia, Divider, Styles } from 'material-ui';
 import Radium from 'radium';
-import { merge, assign } from 'lodash';
+import { merge, assign, extend } from 'lodash';
 import { ShortScrollView } from './short-scroll-view';
 import { ListItem } from '../modules/datastructures';
 import { Item } from './item';
+import { NavigationViewEvent } from './navigation-view';
 
-const ContainerStyle = {
+let ContainerStyle = {
     display: 'flex',
     flexDirection: 'column'
 }
@@ -49,6 +50,14 @@ export class AviLeft extends React.Component<AviLeftProps, AviLeftState> {
             linkHover: false,
             activeItem: -1
         }
+        NavigationViewEvent.on('backScrollTo', this.onViewScrollHandler.bind(this));
+    }
+    componentWillUnMount() {
+        NavigationViewEvent.off('backScrollTo', this.onViewScrollHandler);
+    }
+    onViewScrollHandler(idx: number) {
+        let state: any = assign({}, this.state, {activeItem: idx-1});        
+        this.setState(state);
     }
     itemTapHandler(idx: number, e) {
         let state: any = assign({}, this.state, {activeItem: idx});
@@ -77,7 +86,7 @@ export class AviLeft extends React.Component<AviLeftProps, AviLeftState> {
         this.setState(state);
     }
     render() {
-        let containerStyle = merge(ContainerStyle, this.props.style);
+        const containerStyle = assign({}, ContainerStyle, this.props.style);
         return (
             <div style={containerStyle}>
                 <Card style={CardStyle}>

@@ -77,9 +77,9 @@ export class Comment extends React.Component<CommentPropsInf, CommentStateInf> {
                 <CardHeader
                     style={{height: 'auto'}}
                     title={this.props.title}
-                    titleStyle={{color: "rgb(85,85,85)", fontWeight: "normal"}}
+                    titleStyle={{color: "rgb(85,85,85)", fontWeight: "normal", fontSize: ".8rem"}}
                     subtitle={this.props.time}
-                    subtitleStyle={{color: "rgb(139, 197, 63)", fontStyle: "italic"}}
+                    subtitleStyle={{color: "rgb(139, 197, 63)", fontStyle: "italic", fontSize: ".5rem"}}
                     avatar={<Avatar src={this.props.avatar} size={100}/>}/>
             </a>
         )

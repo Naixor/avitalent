@@ -1,10 +1,12 @@
 declare var require: any;
 
 import * as React from 'react';
-
-import { CommentList } from './comment-list';
+import { FlatButton } from 'material-ui';
+const HardwareKeyboardArrowLeft = require('material-ui/lib/svg-icons/hardware/keyboard-arrow-left');
+const HardwareKeyboardArrowRight = require('material-ui/lib/svg-icons/hardware/keyboard-arrow-right');
 import { get } from '../modules/utils/ajax';
 import { assign } from 'lodash'; 
+import {CommentList} from './comment-list';
 
 const ReactPaginate = require('react-paginate');
 
@@ -52,14 +54,18 @@ export class CommentPaginate extends React.Component<PropsInf, StateInf> {
         return (
             <div>
                 <CommentList comments={this.state.comments}/>
-                <ReactPaginate previousLabel={"<-"}
-                    nextLabel={"->"}
-                    breakLabel={<a href="">...</a>}
-                    pageNum={this.state.perPage}
-                    marginPagesDisplayed={2}
-                    pageRangeDisplayed={3}
-                    clickCallback={this.handlePageClick.bind(this)}
-                    activeClassName="paginate-active"/>
+                <ReactPaginate previousLabel={<HardwareKeyboardArrowLeft/>}
+                       nextLabel={<HardwareKeyboardArrowRight/>}
+                       breakLabel={<a href="">...</a>}
+                       pageNum={this.state.perPage}
+                       marginPagesDisplayed={2}
+                       pageRangeDisplayed={5}
+                       clickCallback={this.handlePageClick}
+                       containerClassName={"paginate-container"}
+                       pageClassName={"paginate-page"}
+                       subContainerClassName={"pages pagination"}
+                       activeClassName={"paginate-active"} />
+                
             </div>
         )
     }
