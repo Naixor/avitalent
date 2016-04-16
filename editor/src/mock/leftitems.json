@@ -1,0 +1,98 @@
+{
+    "status": 0,
+    "data": [
+        {
+            "tag": "祥鹏校园招聘",
+            "link": "/polit/job/xiangpeng",
+            "components": [
+                {
+                    "name": "View",
+                    "props": {
+                        "className": ["child-view"],
+                        "style": {
+                            "backgroundImage": "url(images/pilot-job1.jpg)",
+                            "backgroundColor": "transparent",
+                            "backgroundSize": "cover",
+                            "backgroundPosition": "50% 50%",
+                            "backgroundRepeat": "no-repeat"
+                        },
+                        "locator": "/polit/job/xiangpeng"
+                    },
+                    "children": [
+                        {
+                            "name": "Layout",
+                            "props": {
+                                "raw": "center",
+                                "column": "center"
+                            },
+                            "children": [
+                                {
+                                    "name": "div",
+                                    "props": {
+                                        "className": ["child-view-container"]    
+                                    },
+                                    "children": [
+                                        {
+                                            "name": "Title",
+                                            "props": {
+                                                "style": {
+                                                    "color": "white",
+                                                    "textAlign": "center"
+                                                }
+                                                
+                                            }
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "tag": "Aviation News Daily",
+            "link": "/polit/job/news"
+        },
+        {
+            "tag": "B737 Captain Job",
+            "link": "/polit/job/B737_Captain_Job"
+        },
+        {
+            "tag": "A320/A330 Captain Job",
+            "link": "/polit/job/A320_A330_Captain_Job"
+        },
+        {
+            "tag": "B787 Captain Job",
+            "link": "/polit/job/B787_Captain_Job"
+        },
+        {
+            "tag": "ERJ170/175/190/195 Captain Job",
+            "link": "/polit/job/ERJ170_175_190_195_Captain_Job"
+        },
+        {
+            "tag": "Roadshow Pre Signing Up",
+            "link": "/polit/job/signingup"
+        },
+        {
+            "tag": "Pilot Jobs",
+            "link": "/polit/job/pilot_jobs"
+        },
+        {
+            "tag": "Collect Information",
+            "link": "/polit/job/collect_information"
+        },
+        {
+            "tag": "Upload Document",
+            "link": "/polit/job/upload_document"
+        },
+        {
+            "tag": "About Avitalent",
+            "link": "/polit/job/about"
+        },
+        {
+            "tag": "Contact Us",
+            "link": "/polit/job/contact"
+        }
+    ]
+}

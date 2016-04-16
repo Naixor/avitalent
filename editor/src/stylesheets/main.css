@@ -1,0 +1,240 @@
+@font-face {
+    font-family: 'bebas neue';
+    src: local("BebasNeue"),local("BebasNeue"),url(../fonts/BebasNeue.woff);
+    font-style: normal;
+}
+
+html, body {
+    position: absolute;
+    font-family: 'Titillium Web', 'bebas neue', bebas, 'PingFang SC', 'Microsoft YaHei', 微软雅黑, STXihei, 华文细黑, sans-serif;
+    width: 100%;
+    height: 100%;
+}
+
+html, body, ul {
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size : 20px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    line-height: inherit;
+    font-weight: inherit;
+}
+
+h1 {
+    font-size: 1.2rem;
+}
+
+h2 {
+    font-size: 1.0rem;
+}
+
+h3 {
+    font-size: .9rem;
+}
+
+h4 {
+    font-size: .8rem;
+}
+
+h5 {
+    font-size: .7rem;
+}
+
+h6 {
+    font-size: .6rem;
+}
+
+#app {
+    height: 100%;
+}
+
+.box > div {
+    position: relative;
+}
+
+.leftItemA {
+    color: white;
+    text-decoration: none;
+}
+
+.parent-view {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+div.parent-view > ul > li:nth-child(2n) {
+    background-color: #eee;
+}
+
+.child-view {
+    width: 100%;
+    height: 100%;
+    display: inline-block;
+    font-size: 1rem;
+}
+
+.child-view-container {
+    width: 450px;
+}
+
+.paginate-container {
+    display: inline-block;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.paginate-container li {
+    display: inline-block;
+}
+
+.paginate-page {
+    
+}
+
+.paginate-active {
+    
+}
+
+.paginate-page-link {
+    cursor: default;
+}
+
+.airplane {
+    transform-origin: 0 100%;
+    animation: airplan 2s;
+}
+
+@keyframes airplan {
+    from {
+        transform: rotate(15deg) translate(-2px,3px)
+    }
+    20% {
+        transform: rotate(15deg) translate(-2px,3px)
+    }
+    to {
+        transform: rotate(0deg) translate(0,0)
+    }
+}
+
+@-moz-keyframes airplan {
+    from {
+        transform: rotate(15deg) translate(-2px,3px)        
+    }
+    20% {
+        transform: rotate(15deg) translate(-2px,3px)        
+    }
+    to {
+        transform: rotate(0deg) translate(0,0)
+    }
+}
+
+@-webkit-keyframes airplan {
+    from {
+        transform: rotate(15deg) translate(-2px,3px)        
+    }
+    20% {
+        transform: rotate(15deg) translate(-2px,3px)        
+    }
+    to {
+        transform: rotate(0deg) translate(0,0)
+    }
+}
+
+@-o-keyframes airplan {
+    from {
+        transform: rotate(15deg) translate(-2px,3px)        
+    }
+    20% {
+        transform: rotate(15deg) translate(-2px,3px)        
+    }
+    to {
+        transform: rotate(0deg) translate(0,0)
+    }
+}
+
+.land {
+    animation: land 5s;
+}
+
+@keyframes land {
+    from {
+        transform: translate(0,0)
+    }
+    20% {
+        transform: translate(0,0)
+    }
+    to {
+        transform: translate(0,5px)
+    }
+}
+@-webkit-keyframes land {
+    from {
+        transform: translate(0,0)
+    }
+    to {
+        transform: translate(0,5px)
+    }
+}
+@-moz-keyframes land {
+    from {
+        transform: translate(0,0)
+    }
+    to {
+        transform: translate(0,5px)
+    }
+}
+@-o-keyframes land {
+    from {
+        transform: translate(0,0)
+    }
+    to {
+        transform: translate(0,5px)
+    }
+}
+
+@media only screen and (min-width: 401px){
+    html {
+        font-size: 25px !important;
+    }
+    .child-view-container {
+        width: 250px;
+    }
+}
+@media only screen and (min-width: 480px){
+    html {
+        font-size: 26.75px !important;
+    }
+    .child-view-container {
+        width: 300px;
+    }
+}
+@media only screen and (min-width: 581px){
+    html {
+        font-size: 30px !important; 
+    }
+    .child-view-container {
+        width: 350px;
+    }
+}
+@media only screen and (min-width: 700px){
+    html {
+        font-size: 35px !important; 
+    }
+    .child-view-container {
+        width: 400px;
+    }
+}
+@media only screen and (min-width: 841px){
+    html {
+        font-size: 40px !important; 
+    }
+    .child-view-container {
+        width: 450px;
+    }
+}

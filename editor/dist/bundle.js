@@ -1,0 +1,1 @@
+webpackJsonp([0],[function(e,t,n){n(1),e.exports=n(1)},function(e,t,n){try{(function(){"use strict";var e=n(2),t=n(159),r=n(160),l=e.createClass({render:function(){return e.createElement("div",null,e.createElement("h1",null,"你好"))}});t.render(e.createElement(r.Router,null,e.createElement(r.Route,{path:"/",component:l})),document.body)}).call(this)}finally{}}]);
