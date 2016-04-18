@@ -95,17 +95,11 @@ class App extends React.Component<AppProps, AppState> {
         this.setState(_state);
     }
     getLeftStyle() {
-        return !this.state.smallMode ? {flex: 1,minWidth: '240px',maxWidth: '340px',backgroundColor: Styles.Colors.darkBlack}
-                                    : {flex: 1, minWidth: '0px',maxWidth: '0px', backgroundColor: Styles.Colors.darkBlack};
+        return !this.state.smallMode ? {minWidth: '240px',maxWidth: '340px'}
+                                    : {minWidth: '0px',maxWidth: '0px'};
     }
     render() {
-        if (this.state.smallMode) {
-            this.bigModeLeftStyle.maxWidth = '0px';
-            this.bigModeLeftStyle.minWidth = '0px';    
-        } else {
-            this.bigModeLeftStyle.maxWidth = '340px';
-            this.bigModeLeftStyle.minWidth = '240px';
-        }
+        merge(this.bigModeLeftStyle, this.getLeftStyle());
 
         return (
             <Box minWidth="700" onModeChange={this.handleModeChange.bind(this)}>

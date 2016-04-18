@@ -14,7 +14,7 @@ injectTapEventPlugin();
 
 render((
     <Router history={hashHistory}>
-        <Route path="/" component={Login}></Route>
+        <Route path="/" component={Dashboard}></Route>
         <Route path="/dashboard" component={Dashboard}></Route>
         <Route path="/editor" component={Editor}></Route>                
     </Router>

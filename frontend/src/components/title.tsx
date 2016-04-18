@@ -37,6 +37,7 @@ export class Title extends React.Component<PropsInf, {}> {
 
 interface PropsInf {
     style?: any
+    fontColor?: string
     level?: number
     content?: string
     isUpperCase?: boolean

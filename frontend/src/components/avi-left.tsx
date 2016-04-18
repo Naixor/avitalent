@@ -60,8 +60,7 @@ export class AviLeft extends React.Component<AviLeftProps, AviLeftState> {
         this.setState(state);
     }
     itemTapHandler(idx: number, e) {
-        let state: any = assign({}, this.state, {activeItem: idx});
-        this.setState(state);
+
     }
     isItemShowleftIcon(idx) {
         return this.state.activeItem === idx;
